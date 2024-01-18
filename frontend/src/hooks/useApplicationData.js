@@ -6,7 +6,7 @@ import reducer, {
   CLOSE_MODAL,
   SET_APPLICATION_DATA,
   GET_TOPIC_PHOTOS
-} from "reducers/photoReducer";
+} from "../reducers/photoReducers";
 
 export default function useApplicationData() {
   const defaultState = {
