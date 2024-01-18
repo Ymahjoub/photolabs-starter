@@ -1,45 +1,59 @@
 import React from "react";
 
-import "styles/TopicList.scss";
-import TopicListItem from "components/TopicListItem";
-import FavBadge from "components/FavBadge";
+import "styles/PhotoList.scss";
+import PhotoListItem from "components/PhotoListItem";
 
-const TopicList = (props) => {
-  const { favPhotoList, topics, getTopicPhotos } = props;
-  const topicList = topics.map((topic, index) => {
+const PhotoList = ({
+  favPhotoList,
+  mockPhotos,
+  showModal,
+  photoFavBtnClicked,
+}) => {
+
+  const photoList = mockPhotos.map((photo) => {
+    const { id, user, urls, location } = photo;
     return (
-      <TopicListItem key={index} {...topic} getTopicPhotos={getTopicPhotos} />
+      <PhotoListItem
+        key={id}
+        id={id}
+        user={user}
+        location={location}
+        urls={urls}
+        showModal={showModal}
+        favPhotoList={favPhotoList}
+        photoFavBtnClicked={photoFavBtnClicked}
+      />
     );
   });
 
   return (
     <>
-      <div className="top-nav-bar--topic-list">
-        {topicList}
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <FavBadge isFavPhotoExist={favPhotoList.length > 0 ? true : false} />
-      </div>
+      <ul className="photo-list">{photoList}</ul>
     </>
   );
 };
 
-TopicList.defaultProps = {
-  topics: [
+PhotoList.defaultProps = {
+  photos: [
     {
+      username: "Jacob",
+      imageSource: `${process.env.PUBLIC_URL}/Image.jpg`,
       id: 1,
-      label: "Nature",
-      link: "link placeholder",
+      hideUserName: false,
     },
     {
+      username: "Jacob",
+      imageSource: `${process.env.PUBLIC_URL}/Image.jpg`,
       id: 2,
-      label: "Food",
-      link: "link placeholder",
+      hideUserName: false,
     },
     {
+      username: "Jacob",
+      imageSource: `${process.env.PUBLIC_URL}/Image.jpg`,
       id: 3,
-      label: "People",
-      link: "link placeholder",
+      hideUserName: false,
     },
   ],
 };
-export default TopicList;
+
+export default PhotoList;
