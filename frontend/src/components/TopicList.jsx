@@ -10,7 +10,7 @@ const PhotoList = ({
   photoFavBtnClicked,
 }) => {
 
-  const photoList = mockPhotos.map((photo) => {
+  const photoList = mockPhotos?.map((photo) => {
     const { id, user, urls, location } = photo;
     return (
       <PhotoListItem
