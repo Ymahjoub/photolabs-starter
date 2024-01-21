@@ -3,6 +3,9 @@ The PhotoLabs project for the Web Development React course programming.
 
 # Photolabs
 
+![main page](./docs/main-page.png)
+
+![zoomed in picture](./docs/zoomed-in-pic.png)
 ## Setup
 
 Install dependencies with `npm install` in each respective `/frontend` and `/backend`.
