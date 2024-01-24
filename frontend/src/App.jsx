@@ -12,6 +12,7 @@ const App = () => {
     useApplicationData();
 
   useEffect(() => {
+    // TODO: change to relative url + proxy
     const topicsApi = "http://localhost:8001/api/topics";
     const photosApi = "http://localhost:8001/api/photos";
 

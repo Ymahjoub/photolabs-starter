@@ -1,45 +1,41 @@
 import React from "react";
+import axios from "axios";
 
-import "styles/TopicList.scss";
-import TopicListItem from "components/TopicListItem";
-import FavBadge from "components/FavBadge";
+import "styles/TopicListItem.scss";
 
-const TopicList = (props) => {
-  const { favPhotoList, topics, getTopicPhotos } = props;
-  const topicList = topics.map((topic, index) => {
-    return (
-      <TopicListItem key={index} {...topic} getTopicPhotos={getTopicPhotos} />
-    );
-  });
+const TopicListItem = (props) => {
+  const { id, title, getTopicPhotos } = props;
+
+  const getPhotos = (id) => {
+    axios
+      // TODO: change to relative url + proxy
+      .get(`http://localhost:8001/api/topics/photos/${id}`)
+      .then((res) => {
+        getTopicPhotos(res.data);
+      })
+      .catch((err) =>
+        console.log(
+          "An unexpected error occured attempting to perform request.",
+          err
+        )
+      );
+  };
 
   return (
     <>
-      <div className="top-nav-bar--topic-list">
-        {topicList}
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <FavBadge isFavPhotoExist={favPhotoList.length > 0 ? true : false} />
+      <div className="topic-list--item">
+        <a href="#" onClick={(e) => {
+          e.preventDefault()
+          getPhotos(id)
+        }}>{title}</a>
       </div>
     </>
   );
 };
 
-TopicList.defaultProps = {
-  topics: [
-    {
-      id: 1,
-      label: "Nature",
-      link: "link placeholder",
-    },
-    {
-      id: 2,
-      label: "Food",
-      link: "link placeholder",
-    },
-    {
-      id: 3,
-      label: "People",
-      link: "link placeholder",
-    },
-  ],
+TopicListItem.defaultProps = {
+  id: 1,
+  label: "Nature",
+  link: "link placeholder",
 };
-export default TopicList;
+export default TopicListItem;
